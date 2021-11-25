@@ -1,0 +1,17 @@
+import { Menu } from "./menu.60";
+
+MainWindow := Window {
+    title: "Project Trains - Launcher";
+    background: #12171d;
+    HorizontalLayout { 
+        padding: 10px;
+        Menu {
+            
+        }
+        Rectangle {
+            background: #12171d;
+            height: 715px;
+            width: 790px;
+        }
+    }
+}

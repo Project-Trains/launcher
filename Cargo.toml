@@ -1,0 +1,7 @@
+[package]
+name = "pt-launcher"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sixtyfps = "0.1.5"
