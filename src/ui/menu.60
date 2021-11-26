@@ -2,30 +2,30 @@ MenuButton := Rectangle {
     property <string> button-text;
     property <length> x-text-offset;
     property <image> icon;
-    height: 46px;
-    width: 300px;
+    height: 46phx;
+    width: 300phx;
 
     ta := TouchArea {
         Rectangle { 
             background: ta.has-hover ? #12171d : #0d1016;
             animate background { duration: 0.2s; }
-            height: 46px;
-            border-radius: 16px;
-            x: 15px;
+            height: 46phx;
+            border-radius: 16phx;
+            x: 15phx;
             Text {
                 text: button-text;
                 color: white;
                 font-weight: 800;
-                font-size: 16px;
+                font-size: 16phx;
                 x: x-text-offset;
-                y: 14px;
+                y: 14phx;
             }
             Image {
-                x: 15px;
-                y: 12px;
+                x: 15phx;
+                y: 12phx;
                 source: icon;
-                width: 21px;
-                height: 21px;
+                width: 21phx;
+                height: 21phx;
                 colorize: white;
              }
          }
@@ -33,99 +33,99 @@ MenuButton := Rectangle {
 }
 
 Menu := Rectangle {
-    width: 290px;
-    height: 715px;
+    width: 290phx;
+    height: 715phx;
     clip: false;
     Rectangle {
-        border-radius: 20px;
+        border-radius: 20phx;
         background: #0d1016;
-        width: 720px;
+        width: 720phx;
         VerticalLayout {
             alignment: start;
-            spacing: 20px;
+            spacing: 20phx;
             Image {
                 source: @image-url("../assets/logo-white.png");
-                width: 290px;
+                width: 290phx;
             }
             Rectangle {
-                x: 15px;
-                height: 1px;
-                width: 260px;
+                x: 15phx;
+                height: 1phx;
+                width: 260phx;
                 background: #1b1e23;
             }
             MenuButton {
                 button-text: "Zagraj";
-                x-text-offset: 106px;
+                x-text-offset: 106phx;
                 icon: @image-url("../assets/play-circle.svg");
             }
             MenuButton {
                 button-text: "Zainstaluj";
-                x-text-offset: 94px;
+                x-text-offset: 94phx;
                 icon: @image-url("../assets/cloud-download.svg");
             }
             MenuButton {
                 button-text: "Aktualności";
-                x-text-offset: 85px;
+                x-text-offset: 85phx;
                 icon: @image-url("../assets/newspaper.svg");
             }
             MenuButton {
                 button-text: "Bazar";
-                x-text-offset: 107px;
+                x-text-offset: 107phx;
                 icon: @image-url("../assets/archive.svg");
             }
             MenuButton {
                 button-text: "Ustawienia";
-                x-text-offset: 89px;
+                x-text-offset: 89phx;
                 icon: @image-url("../assets/cog.svg");
             }
             MenuButton {
                 button-text: "Autorzy";
-                x-text-offset: 101px;
+                x-text-offset: 101phx;
                 icon: @image-url("../assets/account-group.svg");
             }
         }
         
         /*Rectangle {
-            width: 1px;
+            width: 1phx;
             height: 100%;
             background: cyan;
-            x: 100px;
+            x: 100phx;
         }
         Rectangle {
-            width: 1px;
+            width: 1phx;
             height: 100%;
             background: blue;
-            x: 115px;
+            x: 115phx;
         }
         Rectangle {
-            width: 1px;
+            width: 1phx;
             height: 100%;
             background: red;
-            x: 145px;
+            x: 145phx;
         }
         Rectangle {
-            width: 1px;
+            width: 1phx;
             height: 100%;
             background: green;
-            x: 130px;
+            x: 130phx;
         }
         Rectangle {
-            width: 1px;
+            width: 1phx;
             height: 100%;
             background: green;
-            x: 160px;
+            x: 160phx;
         }
         Rectangle {
-            width: 1px;
+            width: 1phx;
             height: 100%;
             background: blue;
-            x: 175px;
+            x: 175phx;
         }
         Rectangle {
-            width: 1px;
+            width: 1phx;
             height: 100%;
             background: cyan;
-            x: 190px;
+            x: 190phx;
         }*/
     }
 }
