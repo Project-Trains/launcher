@@ -26,7 +26,6 @@ InstallButton := Rectangle {
 }
 
 TopBar := Rectangle {
-    width: 100%;
     height: 66phx;
     HorizontalLayout {
         padding-top: 10phx;
@@ -38,6 +37,7 @@ TopBar := Rectangle {
         Image {
             source: @image-url("../assets/bell.svg");
             colorize: white;
+            visible: parent.width > 573phx;
         }
         Text {
             text: "Prezes2137";

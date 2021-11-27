@@ -39,7 +39,7 @@ MenuButton := Rectangle {
 
 Menu := Rectangle {
     width: 290phx;
-    height: 715phx;
+    height: 100%;
     clip: false;
 
     callback change-tab(int);
@@ -49,9 +49,10 @@ Menu := Rectangle {
         background: #0d1016;
         width: 720phx;
         VerticalLayout {
-            alignment: start;
+            alignment: stretch;
+            padding-bottom: 15phx;
+            padding-top: 15phx;
             spacing: 16phx;
-            Rectangle {}
             Image {
                 source: @image-url("../assets/logo.svg");
                 width: 250phx;
@@ -112,7 +113,8 @@ Menu := Rectangle {
                 }
             }
             Rectangle { 
-                height: 90phx;
+                vertical-stretch: 1;
+                horizontal-stretch: 1;
             }
             Rectangle { 
                 border-radius: 13phx;

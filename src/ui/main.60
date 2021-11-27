@@ -10,10 +10,16 @@ MainWindow := Window {
 
     title: "Project Trains - Launcher";
     background: #12171d;
+    min-width: 890phx;
+    min-height: 600phx;
+    max-width: 1920phx;
+    max-height: 1080phx;
+    preferred-width: 1000phx;
+    preferred-height: 650phx;
 
-
-    HorizontalLayout { 
+    HorizontalLayout {
         padding: 10phx;
+        width: 100%;
         Menu {
             change-tab(new-tab) => {
                 tab = new-tab;

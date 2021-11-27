@@ -16,7 +16,10 @@ ServerTile := Rectangle {
                 height: 14phx;
                 width: 22phx;
             }
-            Rectangle { width: 15phx; }
+            Rectangle {
+                vertical-stretch: 1;
+                max-width: 20phx;
+            }
             Text { 
                 text: server-name;
                 font-size: 16phx;
@@ -27,17 +30,20 @@ ServerTile := Rectangle {
         }
         Text {
             text: "Sloty: 420/2137";
-            color: #a6a6a6; 
+            color: #a6a6a6;
+            font-size: 12phx;
             font-weight: 800;
         }        
         Text { 
             text: "Ping: 30ms";
             color: #a6a6a6; 
+            font-size: 12phx;
             font-weight: 800;
         }
         Text { 
             text: "IP: 123.456.789.0.1";
             color: #a6a6a6; 
+            font-size: 12phx;
             font-weight: 800;
         }
     }
@@ -45,9 +51,10 @@ ServerTile := Rectangle {
 
 Home := Rectangle {
     background: #12171d;
-    height: 715phx;
-    width: 790phx;
-    VerticalLayout { 
+    vertical-stretch: 1;
+    horizontal-stretch: 1;
+
+    VerticalLayout {
         padding-left: 20phx;
         padding-right: 20phx;
         TopBar {
@@ -89,16 +96,18 @@ Home := Rectangle {
             font-weight: 800;
         }
         Rectangle { height: 15phx; }
+
         Rectangle { 
+            horizontal-stretch: 1;
             vertical-stretch: 1;
             border-radius: 20phx;
-            horizontal-stretch: 1;
             background: #161a1f;
             drop-shadow-color: #0000006e;
             drop-shadow-blur: 12phx;
             clip: true;
             Image {
                 source: @image-url("../assets/devlog.jpg");
+                image-fit: cover;
                 height: parent.height;
                 width: parent.width;
             }
@@ -124,6 +133,7 @@ Home := Rectangle {
                     color: #ffffff;
                     font-size: 32phx;
                     font-weight: 800;
+                    overflow: TextOverflow.elide;
                 }
                 Rectangle { 
                     vertical-stretch: 0;

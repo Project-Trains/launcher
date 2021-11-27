@@ -42,30 +42,27 @@ Item := Rectangle {
 
 News := Rectangle {
     background: #12171d;
-    height: 715phx;
-    width: 790phx;
     clip: true;
 
     VerticalLayout { 
         padding-left: 20phx;
         padding-right: 20phx;
-        TopBar {
-
-        }
+        TopBar {}
         Rectangle { height: 15phx; }
-        ListView {
-            width: 770phx;
-            height: 652phx;
-            border-width: 0;
-            for data in [
-                { text: "Aktualizacja #5 - 4 nowe linie i kilka bugfixów"},
-                { text: "Aktualizacja #4 - Dyżurny ruchu!"},
-                { text: "Aktualizacja #3 - Optymalizacja gameplay'u"},
-                { text: "Aktualizacja #2 - Początki trybu multiplayer, 3 nowe linie"},
-                { text: "Aktualizacja #1 - BABA BEZ NUG"},
-                { text: "Aktualizacja #0 - Lorem ipsum"},
-            ] : Item {
-                title: data.text;
+        VerticalLayout { 
+            padding-right: -20phx;
+            ListView {
+                border-width: 0;
+                for data in [
+                    { text: "Aktualizacja #5 - 4 nowe linie i kilka bugfixów"},
+                    { text: "Aktualizacja #4 - Dyżurny ruchu!"},
+                    { text: "Aktualizacja #3 - Optymalizacja gameplay'u"},
+                    { text: "Aktualizacja #2 - Początki trybu multiplayer, 3 nowe linie"},
+                    { text: "Aktualizacja #1 - BABA BEZ NUG"},
+                    { text: "Aktualizacja #0 - Lorem ipsum"},
+                ] : Item {
+                    title: data.text;
+                }
             }
         }    
     }
@@ -76,5 +73,12 @@ News := Rectangle {
         width: 20phx;
         y: 80phx;
         x: parent.width - 18phx;
+    }
+    Rectangle { 
+        // background: red;
+        background: #12171d;
+        height: 20phx;
+        width: parent.width;
+        y: parent.height - 19phx;
     }
 }

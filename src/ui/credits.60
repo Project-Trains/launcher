@@ -3,8 +3,8 @@ import { ScrollView } from "sixtyfps_widgets.60";
 
 Credits := Rectangle {
     background: #12171d;
-    height: 715phx;
-    width: 790phx;
+    vertical-stretch: 1;
+    horizontal-stretch: 1;
     clip: true;
 
     VerticalLayout { 
@@ -15,8 +15,6 @@ Credits := Rectangle {
         }
         Rectangle { height: 15phx; }
         ScrollView {
-            width: 770phx;
-            height: 690phx;
             border-width: 0;
                 
             VerticalLayout { 
@@ -74,6 +72,12 @@ Credits := Rectangle {
         height: parent.height - 80phx;
         width: 20phx;
         y: 80phx;
-        x: parent.width - 18phx;
+        x: parent.width - 38phx;
+    }
+    Rectangle { 
+        background: #12171d;
+        height: 20phx;
+        width: parent.width;
+        y: parent.height - 19phx;
     }
 }
