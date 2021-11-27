@@ -1,0 +1,79 @@
+import { TopBar } from "./topbar.60";
+import { ScrollView } from "sixtyfps_widgets.60";
+
+Credits := Rectangle {
+    background: #12171d;
+    height: 715phx;
+    width: 790phx;
+    clip: true;
+
+    VerticalLayout { 
+        padding-left: 20phx;
+        padding-right: 20phx;
+        TopBar {
+
+        }
+        Rectangle { height: 15phx; }
+        ScrollView {
+            width: 770phx;
+            height: 690phx;
+            border-width: 0;
+                
+            VerticalLayout { 
+                alignment: start;
+                spacing: 5phx;
+                Text {
+                    text: "Autorzy";
+                    font-size: 24phx;
+                    font-weight: 800;
+                    color: #ffffff;
+                }
+                Rectangle { height: 10phx; }
+                Text {
+                    text: "Programiści";
+                    font-size: 18phx;
+                    font-weight: 800;
+                    color: #ffffff;
+                }
+                Rectangle { }
+                Text {
+                    text: " • Maciej Kałucki";
+                    font-size: 16phx;
+                    color: #ffffff;
+                }
+                Text {
+                    text: " • Oskar Janecki";
+                    font-size: 16phx;
+                    color: #ffffff;
+                }
+                Text {
+                    text: " • Michał Hebda";
+                    font-size: 16phx;
+                    color: #ffffff;
+                }
+                Rectangle { height: 10phx; }
+                Text {
+                    text: "Graficy 3D";
+                    font-size: 18phx;
+                    font-weight: 800;
+                    color: #ffffff;
+                }
+                Rectangle { }
+                Text {
+                    text: " • Szymon Szypulski";
+                    font-size: 16phx;
+                    color: #ffffff;
+                }
+                Rectangle { height: 50phx;}
+            }
+        }
+    }
+    
+    Rectangle { 
+        background: #12171d;
+        height: parent.height - 80phx;
+        width: 20phx;
+        y: 80phx;
+        x: parent.width - 18phx;
+    }
+}
