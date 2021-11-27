@@ -42,10 +42,12 @@ Menu := Rectangle {
         width: 720phx;
         VerticalLayout {
             alignment: start;
-            spacing: 20phx;
+            spacing: 16phx;
+            Rectangle {}
             Image {
-                source: @image-url("../assets/logo-white.png");
-                width: 290phx;
+                source: @image-url("../assets/logo.svg");
+                width: 250phx;
+                x: 22phx;
             }
             Rectangle {
                 x: 15phx;
@@ -83,6 +85,55 @@ Menu := Rectangle {
                 x-text-offset: 101phx;
                 icon: @image-url("../assets/account-group.svg");
             }
+            Rectangle { 
+                height: 90phx;
+            }
+            Rectangle { 
+                border-radius: 13phx;
+                border-color: #d65656;
+                border-width: 3phx;
+                background: #d63434;
+                width: 260phx;
+                x: 15phx;
+                height: 46phx;
+                clip: true;
+
+                for i in [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]: Path {
+                    width: 38phx;
+                    height: 46phx;
+                    stroke: #d65656;
+                    stroke-width: 4phx;
+                    x: i * 15phx;
+
+                    MoveTo {
+                        x: 0;
+                        y: -12;
+                    }
+
+                    LineTo { 
+                        x: 38;
+                        y: 35;
+                    }
+                }
+
+                Text {
+                    text: "Wyjście";
+                    color: white;
+                    font-weight: 800;
+                    font-size: 16phx;
+                    x: 101phx;
+                    y: 14phx;
+                }
+
+                Image {
+                    x: 20phx;
+                    y: 12phx;
+                    source: @image-url("../assets/logout.svg");
+                    width: 21phx;
+                    height: 21phx;
+                    colorize: white;
+                }
+             }
         }
         
         /*Rectangle {
