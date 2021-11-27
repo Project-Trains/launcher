@@ -1,16 +1,22 @@
 import { Menu } from "./menu.60";
 import { Home } from "./home.60";
+import { News } from "./news.60";
 
 MainWindow := Window {
-    title: "Project Trains - Launcher";
+    property <int> tab: 2;
+
+    title: "Project Trains - Launcher " + tab;
     background: #12171d;
+
+
     HorizontalLayout { 
         padding: 10phx;
         Menu {
-            
+            change-tab(new-tab) => {
+                tab = new-tab;
+            }
         }
-        Home {
-            
-        }
+        if tab == 0: Home {}
+        if tab == 2: News {}
     }
 }

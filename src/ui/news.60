@@ -1,0 +1,80 @@
+import { TopBar } from "./topbar.60";
+import { ListView } from "sixtyfps_widgets.60";
+
+Item := Rectangle {
+    property <string> title;
+
+    height: 150phx;
+    width: 100%;
+
+    ta := TouchArea {
+        Rectangle { 
+            border-radius: 12phx;
+            height: 135phx;
+            width: 100%;
+            clip: true;
+
+            Image {
+                height: 100%;
+                width: 100%;
+                source: @image-url("../assets/devlog.jpg");
+                image-fit: cover;
+            }
+            Rectangle {
+                height: parent.height;
+                width: parent.width;
+                animate background { duration: 0.2s; }
+                background: @linear-gradient(0deg, ta.has-hover ? #171b208d : #171b20dc 0%, transparent 95%);
+            }
+            VerticalLayout {
+                padding: 10phx;
+                alignment: end;
+                Text {
+                    text: title;
+                    font-size: 20phx;
+                    color: white;
+                    font-weight: 800;
+                }
+            }
+        }
+    }
+}
+
+News := Rectangle {
+    background: #12171d;
+    height: 715phx;
+    width: 790phx;
+    clip: true;
+
+    VerticalLayout { 
+        padding-left: 20phx;
+        padding-right: 20phx;
+        TopBar {
+
+        }
+        Rectangle { height: 15phx; }
+        ListView {
+            width: 770phx;
+            height: 652phx;
+            border-width: 0;
+            for data in [
+                { text: "Aktualizacja #5 - 4 nowe linie i kilka bugfixów"},
+                { text: "Aktualizacja #4 - Dyżurny ruchu!"},
+                { text: "Aktualizacja #3 - Optymalizacja gameplay'u"},
+                { text: "Aktualizacja #2 - Początki trybu multiplayer, 3 nowe linie"},
+                { text: "Aktualizacja #1 - BABA BEZ NUG"},
+                { text: "Aktualizacja #0 - Lorem ipsum"},
+            ] : Item {
+                title: data.text;
+            }
+        }    
+    }
+    
+    Rectangle { 
+        background: #12171d;
+        height: parent.height - 80phx;
+        width: 20phx;
+        y: 80phx;
+        x: parent.width - 18phx;
+    }
+}

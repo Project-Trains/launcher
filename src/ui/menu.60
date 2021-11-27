@@ -5,7 +5,12 @@ MenuButton := Rectangle {
     height: 46phx;
     width: 300phx;
 
+    callback menu-clicked;
+
     ta := TouchArea {
+        clicked => {
+            root.menu-clicked()
+        }
         Rectangle { 
             background: ta.has-hover ? #12171d : #0d1016;
             animate background { duration: 0.2s; }
@@ -36,6 +41,9 @@ Menu := Rectangle {
     width: 290phx;
     height: 715phx;
     clip: false;
+
+    callback change-tab(int);
+
     Rectangle {
         border-radius: 20phx;
         background: #0d1016;
@@ -59,31 +67,49 @@ Menu := Rectangle {
                 button-text: "Zagraj";
                 x-text-offset: 106phx;
                 icon: @image-url("../assets/play-circle.svg");
+                menu-clicked => {
+                    root.change-tab(0)
+                }
             }
             MenuButton {
                 button-text: "Zainstaluj";
                 x-text-offset: 94phx;
                 icon: @image-url("../assets/cloud-download.svg");
+                menu-clicked => {
+                    root.change-tab(1)
+                }
             }
             MenuButton {
                 button-text: "Aktualności";
                 x-text-offset: 85phx;
                 icon: @image-url("../assets/newspaper.svg");
+                menu-clicked => {
+                    root.change-tab(2)
+                }
             }
             MenuButton {
                 button-text: "Bazar";
                 x-text-offset: 107phx;
                 icon: @image-url("../assets/archive.svg");
+                menu-clicked => {
+                    root.change-tab(3)
+                }
             }
             MenuButton {
                 button-text: "Ustawienia";
                 x-text-offset: 89phx;
                 icon: @image-url("../assets/cog.svg");
+                menu-clicked => {
+                    root.change-tab(4)
+                }
             }
             MenuButton {
                 button-text: "Autorzy";
                 x-text-offset: 101phx;
                 icon: @image-url("../assets/account-group.svg");
+                menu-clicked => {
+                    root.change-tab(5)
+                }
             }
             Rectangle { 
                 height: 90phx;
