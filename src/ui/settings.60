@@ -1,0 +1,92 @@
+import { TopBar } from "./topbar.60";
+import { LineEdit  } from "sixtyfps_widgets.60";
+
+Settings := Rectangle {
+    background: #12171d;
+    height: 715phx;
+    width: 790phx;
+    clip: true;
+
+    VerticalLayout { 
+        padding-left: 20phx;
+        padding-right: 20phx;
+        alignment: start;
+        spacing: 15phx;
+        TopBar {
+
+        }
+        Text {
+            text: "Ustawienia";
+            font-size: 24phx;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        Rectangle {  }
+        Text {
+            text: "Ścieżka do symulatora:";
+            font-size: 16phx;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        // Rectangle {  }
+        LineEdit  {
+            background: #27323f;
+            border-radius: 10phx;
+            border-width: 0;
+            width: 80%;
+            text: "C:/Program Files/ProjectTrains";
+        }  
+        Rectangle {  }
+        Text {
+            text: "Automatyczne aktualizowanie:";
+            font-size: 16phx;
+            font-weight: 800;
+            color: #ffffff;
+        }   
+        Rectangle {  }
+        Text {
+            text: "Język:";
+            font-size: 16phx;
+            font-weight: 800;
+            color: #ffffff;
+        }  
+        Rectangle {  }
+        Rectangle { 
+            border-radius: 13phx;
+            border-color: #d65656;
+            border-width: 3phx;
+            background: #d63434;
+            width: 260phx;
+            x: 15phx;
+            height: 46phx;
+            clip: true;
+
+            for i in [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]: Path {
+                width: 38phx;
+                height: 46phx;
+                stroke: #d65656;
+                stroke-width: 4phx;
+                x: i * 15phx;
+
+                MoveTo {
+                    x: 0;
+                    y: -12;
+                }
+
+                LineTo { 
+                    x: 38;
+                    y: 35;
+                }
+            }
+
+            Text {
+                text: "Wyloguj";
+                color: white;
+                font-weight: 800;
+                font-size: 16phx;
+                x: 101phx;
+                y: 14phx;
+            }
+        }
+    }
+}

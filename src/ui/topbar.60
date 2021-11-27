@@ -12,7 +12,7 @@ InstallButton := Rectangle {
             height: parent.height;
             width: parent.width;
             Text {
-                text: "Zainstaluj launcher";
+                text: "Zainstaluj symulator";
                 color: #ffffff;
                 height: parent.height;
                 width: parent.width;

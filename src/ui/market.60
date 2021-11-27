@@ -1,0 +1,18 @@
+import { TopBar } from "./topbar.60";
+
+Market := Rectangle {
+    background: #12171d;
+    height: 715phx;
+    width: 790phx;
+    clip: true;
+
+    VerticalLayout { 
+        padding-left: 20phx;
+        padding-right: 20phx;
+        TopBar {
+
+        }
+        Rectangle { height: 15phx; }
+        
+    }
+}

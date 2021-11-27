@@ -1,12 +1,14 @@
 import { Menu } from "./menu.60";
 import { Home } from "./home.60";
 import { News } from "./news.60";
+import { Settings } from "./settings.60";
+import { Market } from "./market.60";
 import { Credits } from "./credits.60";
 
 MainWindow := Window {
-    property <int> tab: 5;
+    property <int> tab: 0;
 
-    title: "Project Trains - Launcher " + tab;
+    title: "Project Trains - Launcher";
     background: #12171d;
 
 
@@ -18,7 +20,10 @@ MainWindow := Window {
             }
         }
         if tab == 0: Home {}
+        if tab == 1: Home {}
         if tab == 2: News {}
+        if tab == 3: Market {}
+        if tab == 4: Settings {}
         if tab == 5: Credits {}
     }
 }
