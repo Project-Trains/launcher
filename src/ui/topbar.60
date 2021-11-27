@@ -1,0 +1,108 @@
+InstallButton := Rectangle {
+    height: 45phx;
+    width: 250phx;
+
+    forumButton := TouchArea {
+        height: parent.height;
+        width: parent.width;
+        Rectangle { 
+            background: forumButton.has-hover ? #3c7db6 : #448ccb;
+            animate background { duration: 0.15s; }
+            border-radius: 12phx;
+            height: parent.height;
+            width: parent.width;
+            Text {
+                text: "Zainstaluj launcher";
+                color: #ffffff;
+                height: parent.height;
+                width: parent.width;
+                font-size: 16phx;
+                horizontal-alignment: center;
+                font-weight: 800;
+                vertical-alignment: center;
+            }
+         }
+    }
+}
+
+TopBar := Rectangle {
+    width: 100%;
+    height: 66phx;
+    HorizontalLayout {
+        padding-top: 10phx;
+        padding-bottom: 10phx;
+        padding-left: 20phx;
+        spacing: 16phx;
+        height: 65phx;
+
+        Image {
+            source: @image-url("../assets/bell.svg");
+            colorize: white;
+        }
+        Text {
+            text: "Prezes2137";
+            font-size: 15phx;
+            y: 50phx;
+            font-weight: 800;
+            padding-top: 11phx;
+            vertical-alignment: center;
+            color: #ffffff;
+        }
+        Rectangle {
+            width: 40phx;
+            height: 50phx;
+            Rectangle {
+                border-radius: 20phx;
+                height: 40phx;
+                width: 40phx;
+                y: 5phx;
+                border-width: 4phx;
+                border-color: #1e2731;
+                clip: true;
+                Image {
+                    source: @image-url("../assets/avatar.png");
+                    height: 40phx;
+                    width: 40phx;
+                }
+            }
+        }
+        Rectangle {
+            height: 24phx;
+            width: 76phx;
+
+            forumButton := TouchArea {
+                y: 12phx;
+                height: parent.height;
+                width: parent.width;
+                Rectangle { 
+                    background: forumButton.has-hover ? #3f4f61 : #313f4f;
+                    animate background { duration: 0.2s; }
+                    height: parent.height;
+                    width: parent.width;
+                    border-radius: 8phx;
+                    Text {
+                        text: "Forum";
+                        color: white;
+                        font-weight: 800;
+                        font-size: 14phx;
+                        y: 4phx;
+                        x: 16phx;
+                    }
+                }
+            }
+        }
+        Rectangle { 
+            vertical-stretch: 1;
+            horizontal-stretch: 1;
+        }
+        InstallButton {
+
+        }
+    }
+    Rectangle { 
+        height: 1phx;
+        width: 100%;
+        y: 65phx;
+        background: #1e2228;
+    }
+}

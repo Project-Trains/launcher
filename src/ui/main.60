@@ -1,4 +1,5 @@
 import { Menu } from "./menu.60";
+import { Home } from "./home.60";
 
 MainWindow := Window {
     title: "Project Trains - Launcher";
@@ -8,10 +9,8 @@ MainWindow := Window {
         Menu {
             
         }
-        Rectangle {
-            background: #12171d;
-            height: 715phx;
-            width: 790phx;
+        Home {
+            
         }
     }
 }
