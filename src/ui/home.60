@@ -1,5 +1,48 @@
 import { TopBar } from "./topbar.60";
 
+ServerTile := Rectangle {
+    property <string> server-name;
+    property <image> flag-path;
+
+    background: #313f4f;
+    border-radius: 8phx;
+    height: 90phx;
+    VerticalLayout { 
+        padding: 10phx;
+        HorizontalLayout {
+            padding-bottom: 5phx;
+            Image {
+                source: flag-path;
+                height: 14phx;
+                width: 22phx;
+            }
+            Rectangle { width: 15phx; }
+            Text { 
+                text: server-name;
+                font-size: 16phx;
+                y: -2phx;
+                color: #ffffff;
+                font-weight: 800;
+            }
+        }
+        Text {
+            text: "Sloty: 420/2137";
+            color: #a6a6a6; 
+            font-weight: 800;
+        }        
+        Text { 
+            text: "Ping: 30ms";
+            color: #a6a6a6; 
+            font-weight: 800;
+        }
+        Text { 
+            text: "IP: 123.456.789.0.1";
+            color: #a6a6a6; 
+            font-weight: 800;
+        }
+    }
+}
+
 Home := Rectangle {
     background: #12171d;
     height: 715phx;
@@ -9,6 +52,92 @@ Home := Rectangle {
         padding-right: 20phx;
         TopBar {
 
+        }
+        Rectangle { height: 15phx; }
+        Text {
+            text: "Wybierz serwer, na który chcesz dołączyć";
+            color: #ffffff;
+            font-size: 15phx;
+            font-weight: 800;
+        }
+        HorizontalLayout {
+            padding-top: 15phx;
+            padding-bottom: 15phx;
+            spacing: 10phx;
+
+            ServerTile {
+                server-name: "Serwer PL";
+                flag-path: @image-url("../assets/pl.png");
+            }
+            ServerTile {
+                server-name: "Serwer DE";
+                flag-path: @image-url("../assets/de.png");
+            }
+            ServerTile {
+                server-name: "Serwer RU";
+                flag-path: @image-url("../assets/ru.png");
+            }
+            ServerTile {
+                server-name: "Serwer US";
+                flag-path: @image-url("../assets/us.png");
+            }
+        }
+        Text {
+            text: "Devlog";
+            color: #ffffff;
+            font-size: 15phx;
+            font-weight: 800;
+        }
+        Rectangle { height: 15phx; }
+        Rectangle { 
+            vertical-stretch: 1;
+            border-radius: 20phx;
+            horizontal-stretch: 1;
+            background: #161a1f;
+            drop-shadow-color: #0000006e;
+            drop-shadow-blur: 12phx;
+            clip: true;
+            Image {
+                source: @image-url("../assets/devlog.jpg");
+                height: parent.height;
+                width: parent.width;
+            }
+            Rectangle {
+                height: parent.height;
+                width: parent.width;
+                background: @linear-gradient(0deg, #171b20dc 0%, transparent 95%);
+            }
+            VerticalLayout {
+                padding: 16phx;
+                spacing: 4phx;
+
+                Rectangle { 
+                    vertical-stretch: 1;
+                }
+                Text {
+                    text: "Najnowszy";
+                    color: #ffffff;
+                    font-size: 16phx;
+                }
+                Text {
+                    text: "Devlog #3 - Nowy User Interface gry";
+                    color: #ffffff;
+                    font-size: 32phx;
+                    font-weight: 800;
+                }
+                Rectangle { 
+                    vertical-stretch: 0;
+                }
+                Text {
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
+                    color: #ffffff;
+                    font-size: 15phx;
+                    wrap: word-wrap;
+                }
+                Rectangle { 
+                    vertical-stretch: 0;
+                }
+            }
         }
      }
 }
