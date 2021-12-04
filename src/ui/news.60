@@ -1,22 +1,19 @@
 import { TopBar } from "./topbar.60";
-import { ListView } from "sixtyfps_widgets.60";
 
 Item := Rectangle {
     property <string> title;
-
     height: 150phx;
-    width: 100%;
 
     ta := TouchArea {
         Rectangle { 
             border-radius: 12phx;
             height: 135phx;
-            width: 100%;
+            width: parent.width;
             clip: true;
 
             Image {
                 height: 100%;
-                width: 100%;
+                width: parent.width;
                 source: @image-url("../assets/devlog.jpg");
                 image-fit: cover;
             }
@@ -34,6 +31,7 @@ Item := Rectangle {
                     font-size: 20phx;
                     color: white;
                     font-weight: 800;
+                    overflow: TextOverflow.elide;
                 }
             }
         }
@@ -50,35 +48,20 @@ News := Rectangle {
         TopBar {}
         Rectangle { height: 15phx; }
         VerticalLayout { 
-            padding-right: -20phx;
-            ListView {
-                border-width: 0;
-                for data in [
-                    { text: "Aktualizacja #5 - 4 nowe linie i kilka bugfixów"},
-                    { text: "Aktualizacja #4 - Dyżurny ruchu!"},
-                    { text: "Aktualizacja #3 - Optymalizacja gameplay'u"},
-                    { text: "Aktualizacja #2 - Początki trybu multiplayer, 3 nowe linie"},
-                    { text: "Aktualizacja #1 - BABA BEZ NUG"},
-                    { text: "Aktualizacja #0 - Lorem ipsum"},
-                ] : Item {
-                    title: data.text;
+            Flickable {
+                VerticalLayout { 
+                    for data[i] in [
+                        { text: "Aktualizacja #5 - 4 nowe linie i kilka bugfixów"},
+                        { text: "Aktualizacja #4 - Dyżurny ruchu!"},
+                        { text: "Aktualizacja #3 - Optymalizacja gameplay'u"},
+                        { text: "Aktualizacja #2 - Początki trybu multiplayer, 3 nowe linie"},
+                        { text: "Aktualizacja #1 - BABA BEZ NUG"},
+                        { text: "Aktualizacja #0 - Lorem ipsum"},
+                    ] : Item {
+                        title: data.text;
+                    }
                 }
             }
         }    
-    }
-    
-    Rectangle { 
-        background: #12171d;
-        height: parent.height - 80phx;
-        width: 20phx;
-        y: 80phx;
-        x: parent.width - 18phx;
-    }
-    Rectangle { 
-        // background: red;
-        background: #12171d;
-        height: 20phx;
-        width: parent.width;
-        y: parent.height - 19phx;
     }
 }

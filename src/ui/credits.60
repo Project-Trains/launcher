@@ -1,5 +1,4 @@
 import { TopBar } from "./topbar.60";
-import { ScrollView } from "sixtyfps_widgets.60";
 
 Credits := Rectangle {
     background: #12171d;
@@ -10,13 +9,9 @@ Credits := Rectangle {
     VerticalLayout { 
         padding-left: 20phx;
         padding-right: 20phx;
-        TopBar {
-
-        }
+        TopBar {}
         Rectangle { height: 15phx; }
-        ScrollView {
-            border-width: 0;
-                
+        Flickable {
             VerticalLayout { 
                 alignment: start;
                 spacing: 5phx;
@@ -65,19 +60,5 @@ Credits := Rectangle {
                 Rectangle { height: 50phx;}
             }
         }
-    }
-    
-    Rectangle { 
-        background: #12171d;
-        height: parent.height - 80phx;
-        width: 20phx;
-        y: 80phx;
-        x: parent.width - 38phx;
-    }
-    Rectangle { 
-        background: #12171d;
-        height: 20phx;
-        width: parent.width;
-        y: parent.height - 19phx;
     }
 }
