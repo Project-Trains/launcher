@@ -113,13 +113,16 @@ Menu := Rectangle {
                     root.change-tab(5)
                 }
             }
+            Rectangle {
+                vertical-stretch: 1;
+                horizontal-stretch: 1;
+            }
             quit-ta := TouchArea {
+                width: 260phx;
+                height: 46phx;
+
                 clicked => {
                     root.quit-launcher()
-                }
-                Rectangle {
-                    vertical-stretch: 1;
-                    horizontal-stretch: 1;
                 }
                 Rectangle {
                     background: quit-ta.has-hover ? #f34242 : #d63434;
@@ -127,9 +130,7 @@ Menu := Rectangle {
                     border-radius: 13phx;
                     border-color: #d65656;
                     border-width: 3phx;
-                    width: 260phx;
                     x: 15phx;
-                    height: 46phx;
                     clip: true;
 
                     for i in [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]: Path {
