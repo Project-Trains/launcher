@@ -17,12 +17,17 @@ MainWindow := Window {
     preferred-width: 1000phx;
     preferred-height: 650phx;
 
+    callback close();
+
     HorizontalLayout {
         padding: 10phx;
         width: 100%;
         Menu {
             change-tab(new-tab) => {
                 tab = new-tab;
+            }
+            quit-launcher() => {
+                close();
             }
         }
         if tab == 0: Home {}
