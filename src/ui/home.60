@@ -54,11 +54,15 @@ Home := Rectangle {
     vertical-stretch: 1;
     horizontal-stretch: 1;
 
+    callback forum-button-clicked();
+
     VerticalLayout {
         padding-left: 20phx;
         padding-right: 20phx;
         TopBar {
-
+            forum-click() => { 
+                root.forum-button-clicked()
+            }
         }
         Rectangle { height: 15phx; }
         Text {

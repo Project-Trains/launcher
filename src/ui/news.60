@@ -42,10 +42,16 @@ News := Rectangle {
     background: #12171d;
     clip: true;
 
+    callback forum-button-clicked();
+
     VerticalLayout { 
         padding-left: 20phx;
         padding-right: 20phx;
-        TopBar {}
+        TopBar {
+            forum-click() => { 
+                root.forum-button-clicked()
+            }
+        }
         Rectangle { height: 15phx; }
         VerticalLayout { 
             Flickable {
