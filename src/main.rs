@@ -4,5 +4,14 @@ sixtyfps::sixtyfps!(import { MainWindow } from "src/ui/main.60";);
 
 pub fn main() {
     let main_window = MainWindow::new();
+
+    main_window.on_blog_redirect({
+        move || { open::that("https://project-trains.pl/").unwrap(); }
+    });
+
+    main_window.on_close({
+        move || { std::process::exit(0); }
+    });
+
     main_window.run();
 }

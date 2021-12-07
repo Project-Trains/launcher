@@ -7,6 +7,8 @@ Settings := Rectangle {
     horizontal-stretch: 1;
     clip: true;
 
+    callback forum-button-clicked();
+
     VerticalLayout { 
         padding-left: 20phx;
         padding-right: 20phx;
@@ -14,6 +16,9 @@ Settings := Rectangle {
         spacing: 15phx;
 
         TopBar {
+            forum-click() => { 
+                root.forum-button-clicked()
+            }
         }
      
         Text {
@@ -22,7 +27,7 @@ Settings := Rectangle {
             font-weight: 800;
             color: #ffffff;
         }
-        Rectangle {}
+        Rectangle {  }
         Text {
             text: "Ścieżka do symulatora:";
             font-size: 16phx;

@@ -2,11 +2,17 @@ InstallButton := Rectangle {
     height: 45phx;
     width: 250phx;
 
-    forumButton := TouchArea {
+    callback install-click();
+
+    installButton := TouchArea {
         height: parent.height;
         width: parent.width;
+
+        clicked => { 
+            root.install-click()
+        }
         Rectangle { 
-            background: forumButton.has-hover ? #3c7db6 : #448ccb;
+            background: installButton.has-hover ? #3c7db6 : #448ccb;
             animate background { duration: 0.15s; }
             border-radius: 12phx;
             height: parent.height;
@@ -21,12 +27,15 @@ InstallButton := Rectangle {
                 font-weight: 800;
                 vertical-alignment: center;
             }
-         }
+        }
     }
 }
 
 TopBar := Rectangle {
     height: 66phx;
+
+    callback forum-click();
+
     HorizontalLayout {
         padding-top: 10phx;
         padding-bottom: 10phx;
@@ -74,6 +83,10 @@ TopBar := Rectangle {
                 y: 12phx;
                 height: parent.height;
                 width: parent.width;
+
+                clicked => { 
+                    root.forum-click()
+                }
                 Rectangle { 
                     background: forumButton.has-hover ? #3f4f61 : #313f4f;
                     animate background { duration: 0.2s; }
@@ -96,7 +109,6 @@ TopBar := Rectangle {
             horizontal-stretch: 1;
         }
         InstallButton {
-
         }
     }
     Rectangle { 

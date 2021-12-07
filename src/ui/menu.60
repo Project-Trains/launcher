@@ -33,7 +33,7 @@ MenuButton := Rectangle {
                 height: 21phx;
                 colorize: white;
              }
-         }
+        }
     }
 }
 
@@ -43,6 +43,7 @@ Menu := Rectangle {
     clip: false;
 
     callback change-tab(int);
+    callback quit-launcher();
 
     Rectangle {
         border-radius: 20phx;
@@ -112,56 +113,63 @@ Menu := Rectangle {
                     root.change-tab(5)
                 }
             }
-            Rectangle { 
+            Rectangle {
                 vertical-stretch: 1;
                 horizontal-stretch: 1;
             }
-            Rectangle { 
-                border-radius: 13phx;
-                border-color: #d65656;
-                border-width: 3phx;
-                background: #d63434;
+            quit-ta := TouchArea {
                 width: 260phx;
-                x: 15phx;
                 height: 46phx;
-                clip: true;
 
-                for i in [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]: Path {
-                    width: 38phx;
-                    height: 46phx;
-                    stroke: #d65656;
-                    stroke-width: 4phx;
-                    x: i * 15phx;
+                clicked => {
+                    root.quit-launcher()
+                }
+                Rectangle {
+                    background: quit-ta.has-hover ? #f34242 : #d63434;
+                    animate background { duration: 0.2s; }
+                    border-radius: 13phx;
+                    border-color: #d65656;
+                    border-width: 3phx;
+                    x: 15phx;
+                    clip: true;
 
-                    MoveTo {
-                        x: 0;
-                        y: -12;
+                    for i in [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]: Path {
+                        width: 38phx;
+                        height: 46phx;
+                        stroke: #d65656;
+                        stroke-width: 4phx;
+                        x: i * 15phx;
+
+                        MoveTo {
+                            x: 0;
+                            y: -12;
+                        }
+
+                        LineTo { 
+                            x: 38;
+                            y: 35;
+                        }
                     }
 
-                    LineTo { 
-                        x: 38;
-                        y: 35;
+                    Text {
+                        text: "Wyjście";
+                        color: white;
+                        font-weight: 800;
+                        font-size: 16phx;
+                        x: 101phx;
+                        y: 14phx;
+                    }
+
+                    Image {
+                        x: 20phx;
+                        y: 12phx;
+                        source: @image-url("../assets/logout.svg");
+                        width: 21phx;
+                        height: 21phx;
+                        colorize: white;
                     }
                 }
-
-                Text {
-                    text: "Wyjście";
-                    color: white;
-                    font-weight: 800;
-                    font-size: 16phx;
-                    x: 101phx;
-                    y: 14phx;
-                }
-
-                Image {
-                    x: 20phx;
-                    y: 12phx;
-                    source: @image-url("../assets/logout.svg");
-                    width: 21phx;
-                    height: 21phx;
-                    colorize: white;
-                }
-             }
+            }
         }
         
         /*Rectangle {

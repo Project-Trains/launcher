@@ -17,6 +17,9 @@ MainWindow := Window {
     preferred-width: 1000phx;
     preferred-height: 650phx;
 
+    callback blog-redirect();
+    callback close();
+
     HorizontalLayout {
         padding: 10phx;
         width: 100%;
@@ -24,12 +27,39 @@ MainWindow := Window {
             change-tab(new-tab) => {
                 tab = new-tab;
             }
+            quit-launcher() => {
+                root.close();
+            }
         }
-        if tab == 0: Home {}
-        if tab == 1: Home {}
-        if tab == 2: News {}
-        if tab == 3: Market {}
-        if tab == 4: Settings {}
-        if tab == 5: Credits {}
+        if tab == 0: Home {
+            forum-button-clicked() => { 
+                root.blog-redirect();
+            }
+        }
+        if tab == 1: Home {
+            forum-button-clicked() => { 
+                root.blog-redirect();
+            }
+        }
+        if tab == 2: News {
+            forum-button-clicked() => { 
+                root.blog-redirect();
+            }
+        }
+        if tab == 3: Market {
+            forum-button-clicked() => { 
+                root.blog-redirect();
+            }
+        }
+        if tab == 4: Settings {
+            forum-button-clicked() => { 
+                root.blog-redirect();
+            }
+        }
+        if tab == 5: Credits {
+            forum-button-clicked() => { 
+                root.blog-redirect();
+            }
+        }
     }
 }
