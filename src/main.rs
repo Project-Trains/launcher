@@ -5,27 +5,41 @@ use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 struct DiscussionsIncludesAttributes {
-    contentType : String,
     contentHtml : String,
 }
 
 #[derive(Debug, Deserialize)]
 struct DiscussionsIncludes {
     id : String,
-    //attributes : HashMap<String, String>
-    //attributes : DiscussionsIncludesAttributes
+    attributes : DiscussionsIncludesAttributes,
+}
+
+#[derive(Debug, Deserialize)]
+struct DiscussionsDataRelationshipsFirstPostData {
+    id : String
+}
+
+#[derive(Debug, Deserialize)]
+struct DiscussionsDataRelationshipsFirstPost {
+    data : DiscussionsDataRelationshipsFirstPostData
+}
+
+#[derive(Debug, Deserialize)]
+struct DiscussionsDataRelationships {
+    firstPost : DiscussionsDataRelationshipsFirstPost
 }
 
 #[derive(Debug, Deserialize)]
 struct DiscussionsDataAttributes {
     title : String,
-    shareUrl : String,
+    shareUrl : String
 }
 
 #[derive(Debug, Deserialize)]
 struct DiscussionsData {
     id : String,
-    attributes : DiscussionsDataAttributes
+    attributes : DiscussionsDataAttributes,
+    relationships : DiscussionsDataRelationships
 }
 
 #[derive(Debug, Deserialize)]
@@ -36,7 +50,7 @@ struct Discussions {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let resp = reqwest::get("https://project-trains.pl/api/discussions?include=user%2ClastPostedUser%2CfirstPost%2Ctags%2Ctags.parent&filter%5Btag%5D=devlogi&sort=-createdAt&page%5Boffset%5D=0")
+    let resp = reqwest::get("https://project-trains.pl/api/discussions?include=firstPost&filter%5Btag%5D=devlogi&sort=-createdAt&page%5Boffset%5D=0")
         .await?;
 
     let resp_json = resp.json::<Discussions>().await?;
