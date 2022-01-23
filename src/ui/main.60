@@ -1,12 +1,14 @@
 import { Menu } from "./menu.60";
 import { Home } from "./home.60";
 import { News } from "./news.60";
+import { NewsData } from "./newsdata.60";
 import { Settings } from "./settings.60";
 import { Market } from "./market.60";
 import { Credits } from "./credits.60";
 
 MainWindow := Window {
     property <int> tab: 0;
+    property <[NewsData]> news: [];
 
     title: "Project Trains - Launcher";
     background: #12171d;
@@ -42,6 +44,8 @@ MainWindow := Window {
             }
         }
         if tab == 2: News {
+            news : root.news;
+            
             forum-button-clicked() => { 
                 root.blog-redirect();
             }
