@@ -1,10 +1,10 @@
-sixtyfps::sixtyfps!(import { MainWindow } from "src/ui/main.60";);
-sixtyfps::sixtyfps!(import { NewsData } from "src/ui/newsdata.60";);
+slint::slint!(import { MainWindow } from "src/ui/main.slint";);
+slint::slint!(import { NewsData } from "src/ui/newsdata.slint";);
 
 //use std::collections::HashMap;
 use pt_launcher::{load_img, parse_img};
 use serde::Deserialize;
-use sixtyfps::SharedString;
+use slint::SharedString;
 use std::time::Duration;
 
 #[derive(Debug, Deserialize)]
@@ -94,7 +94,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn update_discussions(handle: sixtyfps::Weak<MainWindow>, discussions: Vec<Discussion>) {
+fn update_discussions(handle: slint::Weak<MainWindow>, discussions: Vec<Discussion>) {
     handle.upgrade_in_event_loop(move |handle| {
         let mut news_data: Vec<NewsData> = vec![];
 
@@ -107,12 +107,12 @@ fn update_discussions(handle: sixtyfps::Weak<MainWindow>, discussions: Vec<Discu
             news_data.push(news);
         }
 
-        let news_model = std::rc::Rc::new(sixtyfps::VecModel::from(news_data));
-        handle.set_news(sixtyfps::ModelHandle::new(news_model.clone()));
+        let news_model = std::rc::Rc::new(slint::VecModel::from(news_data));
+        handle.set_news(slint::ModelRc::from(news_model.clone()));
     });
 }
 
-fn update_featured(handle: sixtyfps::Weak<MainWindow>, image: Vec<u8>, w: u32, h: u32) {
+fn update_featured(handle: slint::Weak<MainWindow>, image: Vec<u8>, w: u32, h: u32) {
     handle.upgrade_in_event_loop(move |handle| {
         let img = parse_img(image, w, h);
         handle.set_featured(img);
