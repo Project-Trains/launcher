@@ -4,10 +4,17 @@ import { NewsData } from "./newsdata.slint";
 Item := Rectangle {
     property <string> title;
     property <image> image;
+
+    callback news-clicked();
+
     height: 150phx;
     max-width: 1200phx;
 
     ta := TouchArea {
+        clicked => {
+            root.news-clicked()
+        }
+
         Rectangle { 
             border-radius: 12phx;
             height: 135phx;
@@ -47,13 +54,14 @@ News := Rectangle {
     clip: true;
 
     callback forum-button-clicked();
+    callback news-button-clicked(string);
 
     VerticalLayout { 
         padding-left: 20phx;
         padding-right: 20phx;
         TopBar {
             forum-click() => { 
-                root.forum-button-clicked()
+                root.forum-button-clicked();
             }
         }
         Rectangle { height: 15phx; }
@@ -63,6 +71,10 @@ News := Rectangle {
                     for data[i] in root.news : Item {
                         title: data.title;
                         image: data.cover;
+                        
+                        news-clicked() => {
+                            root.news-button-clicked(data.url);
+                        }
                     }
                 }
             }

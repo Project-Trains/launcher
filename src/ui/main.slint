@@ -8,6 +8,7 @@ import { Credits } from "./credits.slint";
 
 MainWindow := Window {
     property <int> tab: 0;
+    property <string> forum_url: "https://project-trains.pl/";
     property <[NewsData]> news: [];
     property <image> featured;
 
@@ -20,7 +21,7 @@ MainWindow := Window {
     preferred-width: 1000phx;
     preferred-height: 650phx;
 
-    callback blog-redirect();
+    callback url-redirect(string);
     callback close();
 
     HorizontalLayout {
@@ -37,34 +38,37 @@ MainWindow := Window {
         if tab == 0: Home {
             featured-image: root.featured;
             forum-button-clicked() => { 
-                root.blog-redirect();
+                root.url-redirect(forum_url);
             }
         }
         if tab == 1: Home {
             forum-button-clicked() => { 
-                root.blog-redirect();
+                root.url-redirect(forum_url);
             }
         }
         if tab == 2: News {
             news : root.news;
             
             forum-button-clicked() => { 
-                root.blog-redirect();
+                root.url-redirect(forum_url);
+            }
+            news-button-clicked(url) => { 
+                root.url-redirect(url);
             }
         }
         if tab == 3: Market {
             forum-button-clicked() => { 
-                root.blog-redirect();
+                root.url-redirect(forum_url);
             }
         }
         if tab == 4: Settings {
             forum-button-clicked() => { 
-                root.blog-redirect();
+                root.url-redirect(forum_url);
             }
         }
         if tab == 5: Credits {
             forum-button-clicked() => { 
-                root.blog-redirect();
+                root.url-redirect(forum_url);
             }
         }
     }
