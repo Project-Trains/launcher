@@ -10,7 +10,6 @@ MainWindow := Window {
     property <int> tab: 0;
     property <string> forum_url: "https://project-trains.pl/";
     property <[NewsData]> news: [];
-    property <image> featured;
 
     title: "Project Trains - Launcher";
     background: #12171d;
@@ -36,9 +35,13 @@ MainWindow := Window {
             }
         }
         if tab == 0: Home {
-            featured-image: root.featured;
+            featured-data: root.news[0];
+
             forum-button-clicked() => { 
                 root.url-redirect(forum_url);
+            }
+            featured-button-clicked(featured_url) => { 
+                root.url-redirect(featured_url);
             }
         }
         if tab == 1: Home {
@@ -47,7 +50,7 @@ MainWindow := Window {
             }
         }
         if tab == 2: News {
-            news : root.news;
+            news: root.news;
             
             forum-button-clicked() => { 
                 root.url-redirect(forum_url);

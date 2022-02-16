@@ -1,4 +1,5 @@
 import { TopBar } from "./topbar.slint";
+import { NewsData } from "./newsdata.slint";
 
 ServerTile := Rectangle {
     property <string> server-name;
@@ -50,22 +51,27 @@ ServerTile := Rectangle {
 }
 
 Home := Rectangle {
+    property <NewsData> featured-data;
+
+    callback forum-button-clicked();
+    callback featured-button-clicked(string);
+
     background: #12171d;
     vertical-stretch: 1;
     horizontal-stretch: 1;
 
-    callback forum-button-clicked();
-    property <image> featured-image;
-
     VerticalLayout {
         padding-left: 20phx;
         padding-right: 20phx;
+
         TopBar {
             forum-click() => { 
                 root.forum-button-clicked()
             }
         }
+
         Rectangle { height: 15phx; }
+        
         Text {
             text: "Wybierz serwer, na który chcesz dołączyć";
             color: #ffffff;
@@ -100,6 +106,7 @@ Home := Rectangle {
             font-size: 15phx;
             font-weight: 800;
         }
+
         Rectangle { height: 15phx; }
 
         Rectangle { 
@@ -110,47 +117,54 @@ Home := Rectangle {
             drop-shadow-color: #0000006e;
             drop-shadow-blur: 12phx;
             clip: true;
-            Image {
-                source: featured-image;
-                image-fit: cover;
-                height: parent.height;
-                width: parent.width;
-            }
-            Rectangle {
-                height: parent.height;
-                width: parent.width;
-                background: @linear-gradient(0deg, #171b20dc 0%, transparent 95%);
-            }
-            VerticalLayout {
-                padding: 16phx;
-                spacing: 4phx;
 
-                Rectangle { 
-                    vertical-stretch: 1;
+            ta := TouchArea {
+                clicked => { 
+                    root.featured-button-clicked(featured-data.url);
                 }
-                Text {
-                    text: "Najnowszy";
-                    color: #ffffff;
-                    font-size: 16phx;
+
+                Image {
+                    source: featured-data.cover;
+                    image-fit: cover;
+                    height: parent.height;
+                    width: parent.width;
                 }
-                Text {
-                    text: "Devlog #3 - Nowy User Interface gry";
-                    color: #ffffff;
-                    font-size: 32phx;
-                    font-weight: 800;
-                    overflow: TextOverflow.elide;
+                Rectangle {
+                    height: parent.height;
+                    width: parent.width;
+                    background: @linear-gradient(0deg, ta.has-hover ? #171b208d : #171b20dc 0%, transparent 95%);
                 }
-                Rectangle { 
-                    vertical-stretch: 0;
-                }
-                Text {
-                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
-                    color: #ffffff;
-                    font-size: 15phx;
-                    wrap: word-wrap;
-                }
-                Rectangle { 
-                    vertical-stretch: 0;
+                VerticalLayout {
+                    padding: 16phx;
+                    spacing: 4phx;
+
+                    Rectangle { 
+                        vertical-stretch: 1;
+                    }
+                    Text {
+                        text: "Najnowszy";
+                        color: #ffffff;
+                        font-size: 16phx;
+                    }
+                    Text {
+                        text: featured-data.title;
+                        color: #ffffff;
+                        font-size: 32phx;
+                        font-weight: 800;
+                        overflow: TextOverflow.elide;
+                    }
+                    Rectangle { 
+                        vertical-stretch: 0;
+                    }
+                    Text {
+                        text: featured-data.excerpt;
+                        color: #ffffff;
+                        font-size: 15phx;
+                        wrap: word-wrap;
+                    }
+                    Rectangle { 
+                        vertical-stretch: 0;
+                    }
                 }
             }
         }
