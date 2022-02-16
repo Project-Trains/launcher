@@ -1,7 +1,9 @@
 import { TopBar } from "./topbar.60";
+import { NewsData } from "./newsdata.60";
 
 Item := Rectangle {
     property <string> title;
+    property <image> image;
     height: 150phx;
 
     ta := TouchArea {
@@ -14,7 +16,7 @@ Item := Rectangle {
             Image {
                 height: 100%;
                 width: parent.width;
-                source: @image-url("../assets/devlog.jpg");
+                source: image;
                 image-fit: cover;
             }
             Rectangle {
@@ -39,6 +41,7 @@ Item := Rectangle {
 }
 
 News := Rectangle {
+    property <[NewsData]> news;
     background: #12171d;
     clip: true;
 
@@ -55,16 +58,10 @@ News := Rectangle {
         Rectangle { height: 15phx; }
         VerticalLayout { 
             Flickable {
-                VerticalLayout { 
-                    for data[i] in [
-                        { text: "Aktualizacja #5 - 4 nowe linie i kilka bugfixów"},
-                        { text: "Aktualizacja #4 - Dyżurny ruchu!"},
-                        { text: "Aktualizacja #3 - Optymalizacja gameplay'u"},
-                        { text: "Aktualizacja #2 - Początki trybu multiplayer, 3 nowe linie"},
-                        { text: "Aktualizacja #1 - BABA BEZ NUG"},
-                        { text: "Aktualizacja #0 - Lorem ipsum"},
-                    ] : Item {
-                        title: data.text;
+                VerticalLayout {
+                    for data[i] in root.news : Item {
+                        title: data.title;
+                        image: data.cover;
                     }
                 }
             }
