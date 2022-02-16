@@ -87,9 +87,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         update_discussions(handle_weak.clone(), discussions);
-
-        let (img, w, h) = load_img("https://picsum.photos/800/450").await;
-        update_featured(handle_weak.clone(), img, w, h);
     });
 
     main_window.run();
@@ -103,8 +100,9 @@ fn update_discussions(handle: slint::Weak<MainWindow>, discussions: Vec<Discussi
         for i in 0..discussions.len() {
             let news = NewsData {
                 title: SharedString::from(discussions[i].title.clone()),
+                excerpt: SharedString::from("BABA BEZ NUG Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
                 cover: parse_img(discussions[i].image_buffer.to_vec(), discussions[i].width, discussions[i].height),
-                url: SharedString::from(discussions[i].url.clone()),
+                url: SharedString::from(discussions[i].url.clone())
             };
 
             news_data.push(news);
@@ -112,12 +110,5 @@ fn update_discussions(handle: slint::Weak<MainWindow>, discussions: Vec<Discussi
 
         let news_model = std::rc::Rc::new(slint::VecModel::from(news_data));
         handle.set_news(slint::ModelRc::from(news_model.clone()));
-    });
-}
-
-fn update_featured(handle: slint::Weak<MainWindow>, image: Vec<u8>, w: u32, h: u32) {
-    handle.upgrade_in_event_loop(move |handle| {
-        let img = parse_img(image, w, h);
-        handle.set_featured(img);
     });
 }
