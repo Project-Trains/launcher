@@ -16,7 +16,7 @@ Item := Rectangle {
             Image {
                 height: 100%;
                 width: parent.width;
-                source: @image-url("../assets/devlog.jpg");
+                source: image;
                 image-fit: cover;
             }
             Rectangle {
@@ -61,6 +61,7 @@ News := Rectangle {
                 VerticalLayout {
                     for data[i] in root.news : Item {
                         title: data.title;
+                        image: data.cover;
                     }
                 }
             }

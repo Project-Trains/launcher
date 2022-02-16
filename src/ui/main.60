@@ -9,7 +9,7 @@ import { Credits } from "./credits.60";
 MainWindow := Window {
     property <int> tab: 0;
     property <[NewsData]> news: [];
-    property <image> image;
+    property <image> featured;
 
     title: "Project Trains - Launcher";
     background: #12171d;
@@ -35,7 +35,7 @@ MainWindow := Window {
             }
         }
         if tab == 0: Home {
-            featured-image: root.image;
+            featured-image: root.featured;
             forum-button-clicked() => { 
                 root.blog-redirect();
             }
