@@ -8,8 +8,8 @@ pub async fn load_img(url: &str) -> (Vec<u8>, u32, u32) {
     (img.as_bytes().to_vec(), w, h)
 }
 
-pub fn parse_img(img_bytes: Vec<u8>, w: u32, h: u32) -> sixtyfps::Image {
-    let mut pixel_buffer = sixtyfps::SharedPixelBuffer::new(w as usize, h as usize);
+pub fn parse_img(img_bytes: Vec<u8>, w: u32, h: u32) -> slint::Image {
+    let mut pixel_buffer = slint::SharedPixelBuffer::new(w, h);
     let bytes = pixel_buffer.make_mut_bytes();
     
     // print!("w * h: {0}\n", w * h);
@@ -26,5 +26,5 @@ pub fn parse_img(img_bytes: Vec<u8>, w: u32, h: u32) -> sixtyfps::Image {
         bytes[i] = img_bytes[i];
     }
 
-    sixtyfps::Image::from_rgba8(pixel_buffer)
+    slint::Image::from_rgba8(pixel_buffer)
 }
