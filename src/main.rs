@@ -38,6 +38,7 @@ struct Discussions {
 
 struct Discussion {
     title : String,
+    url : String,
     image_buffer : Vec<u8>,
     width: u32,
     height: u32
@@ -49,9 +50,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let handle_weak = main_window.as_weak();
     let mut discussions: Vec<Discussion> = vec![];
 
-    main_window.on_blog_redirect({
-        move || {
-            open::that("https://project-trains.pl/").unwrap();
+    main_window.on_url_redirect({
+        move |url| {
+            open::that(url.as_str()).unwrap();
         }
     });
 
@@ -76,6 +77,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             let disc = Discussion {
                 title: disc_json.data[i].attributes.title.clone(),
+                url: disc_json.data[i].attributes.shareUrl.clone(),
                 image_buffer: img_buffer,
                 width: w,
                 height: h
@@ -101,7 +103,8 @@ fn update_discussions(handle: slint::Weak<MainWindow>, discussions: Vec<Discussi
         for i in 0..discussions.len() {
             let news = NewsData {
                 title: SharedString::from(discussions[i].title.clone()),
-                cover: parse_img(discussions[i].image_buffer.to_vec(), discussions[i].width, discussions[i].height)
+                cover: parse_img(discussions[i].image_buffer.to_vec(), discussions[i].width, discussions[i].height),
+                url: SharedString::from(discussions[i].url.clone()),
             };
 
             news_data.push(news);
