@@ -30,4 +30,4 @@ jobs:
       - name: "Upload Artifact"
         uses: actions/upload-artifact@v2
         with:
-          path: /target/release/pt-launcher.exe
+          path: /a/launcher/launcher/target/release/pt-launcher.exe
