@@ -4,9 +4,9 @@
 
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Project-Trains/launcher-rust)
 ![GitHub issues](https://img.shields.io/github/issues-raw/Project-Trains/launcher-rust)
-![GitHub](https://img.shields.io/github/license/Project-Trains/launcher-rust)
+![GitHub](https://img.shields.io/badge/license-unlicensed-lightgrey)
 
-Crossplatform game launcher made for Project Trains simulator using [Rust](https://www.rust-lang.org/) and [SixtyFPS](https://sixtyfps.io/) library.
+Crossplatform game launcher made for Project Trains simulator using [Rust](https://www.rust-lang.org/) and [Slint](https://slint-ui.com/) library.
 
 ## Contributing
 
