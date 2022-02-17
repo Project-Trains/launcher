@@ -1,51 +1,48 @@
 slint::slint!(import { MainWindow } from "src/ui/main.slint";);
 slint::slint!(import { NewsData } from "src/ui/newsdata.slint";);
 
-//use std::collections::HashMap;
 use pt_launcher::{load_img, parse_img};
-use serde::Deserialize;
 use slint::SharedString;
 use std::time::Duration;
 
-#[derive(Debug, Deserialize)]
-struct DiscussionsIncludesAttributes {
-    featuredImage : String,
-}
-
-#[derive(Debug, Deserialize)]
-struct DiscussionsIncludes {
-    id : String,
-    attributes : DiscussionsIncludesAttributes,
-}
-
-#[derive(Debug, Deserialize)]
-struct DiscussionsDataAttributes {
-    title : String,
-    shareUrl : String,
-}
-
-#[derive(Debug, Deserialize)]
-struct DiscussionsData {
-    id : String,
-    attributes : DiscussionsDataAttributes,
-}
-
-#[derive(Debug, Deserialize)]
-struct Discussions {
-    data : Vec<DiscussionsData>,
-    included : Vec<DiscussionsIncludes>
-}
-
 struct Discussion {
-    title : String,
-    url : String,
-    image_buffer : Vec<u8>,
-    width: u32,
-    height: u32
+    title: String,
+    url: String,
+    excerpt: String,
+    image_buffer: Vec<u8>,
+    width: usize,
+    height: usize,
+}
+
+impl Discussion {
+    fn new(
+        title: Option<&str>,
+        excerpt: Option<&str>,
+        url: Option<&str>,
+        image_buffer: Vec<u8>,
+        width: usize,
+        height: usize,
+    ) -> Self {
+        Discussion {
+            title: Self::get_string(title),
+            excerpt: Self::get_string(excerpt),
+            url: Self::get_string(url),
+            image_buffer,
+            width,
+            height,
+        }
+    }
+
+    pub fn get_string(option: Option<&str>) -> String {
+        match option {
+            Some(v) => v.to_string(),
+            None => String::new(),
+        }
+    }
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() {
     let main_window = MainWindow::new();
     let handle_weak = main_window.as_weak();
     let mut discussions: Vec<Discussion> = vec![];
@@ -66,22 +63,29 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         // delay for testing
         std::thread::sleep(Duration::new(2, 0));
 
-        let disc_resp = reqwest::get("https://project-trains.pl/api/discussions?include=blogMeta&filter[q]=is:blog+tag:devlogi&sort=-createdAt").await;
-        let disc_json = disc_resp.unwrap().json::<Discussions>().await.unwrap();
-        println!("{:#?}", disc_json);
+        let disc_resp = tinyget::get("https://project-trains.pl/api/discussions?include=blogMeta&filter[q]=is:blog+tag:devlogi&sort=-createdAt")
+            .send()
+            .unwrap();
 
-        for i in 0..disc_json.data.len() {
-            let img_url : &str = &disc_json.included[i].attributes.featuredImage;
-            let (img_buffer, w, h) = load_img(img_url).await;
-            // let (img_buffer, w, h) = load_img("https://picsum.photos/800/450").await;
+        let disc_json = json::parse(disc_resp.as_str().unwrap()).unwrap();
+        //println!("{:#?}", disc_json);
 
-            let disc = Discussion {
-                title: disc_json.data[i].attributes.title.clone(),
-                url: disc_json.data[i].attributes.shareUrl.clone(),
-                image_buffer: img_buffer,
-                width: w,
-                height: h
-            };
+        for i in 0..disc_json["data"].len() {
+            let data = &disc_json["data"][i]["attributes"];
+            let included = &disc_json["included"][i]["attributes"];
+            
+            let img_url: String = Discussion::get_string(included["featuredImage"].as_str());
+            let (img_buffer, w, h) = load_img(img_url.as_str()).await;
+            //let (img_buffer, w, h) = load_img("https://picsum.photos/800/450").await;
+
+            let disc = Discussion::new(
+                data["title"].as_str(),
+                included["summary"].as_str(),
+                data["shareUrl"].as_str(),
+                img_buffer,
+                w,
+                h,
+            );
 
             discussions.push(disc);
         }
@@ -90,7 +94,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     });
 
     main_window.run();
-    Ok(())
 }
 
 fn update_discussions(handle: slint::Weak<MainWindow>, discussions: Vec<Discussion>) {
@@ -100,7 +103,7 @@ fn update_discussions(handle: slint::Weak<MainWindow>, discussions: Vec<Discussi
         for i in 0..discussions.len() {
             let news = NewsData {
                 title: SharedString::from(discussions[i].title.clone()),
-                excerpt: SharedString::from("BABA BEZ NUG Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."),
+                excerpt: SharedString::from(discussions[i].excerpt.clone()),
                 cover: parse_img(discussions[i].image_buffer.to_vec(), discussions[i].width, discussions[i].height),
                 url: SharedString::from(discussions[i].url.clone())
             };

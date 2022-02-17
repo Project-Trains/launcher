@@ -7,10 +7,11 @@ edition = "2021"
 slint = "0.2.0"
 open = "2.0.3"
 futures = "0.3.21"
-image = "0.24.0"
-reqwest = { version = "0.11.9", features = ["json"] }
+tinyget = { version = "1.0", features = ["https"] }
+json = "0.12.4"
+lodepng = "3.6.1"
+rgb = "0.8.31"
 tokio = { version = "1.16.1", features = ["full"] }
-serde = { version = "1.0.136", features = ["derive"] }
 
 [build-dependencies]
 slint-build = "0.2.0"

@@ -1,15 +1,15 @@
-use image;
-use image::GenericImageView;
+use lodepng::decode32;
+use rgb::ComponentBytes;
 
-pub async fn load_img(url: &str) -> (Vec<u8>, u32, u32) {
-    let resp = reqwest::get(url).await.unwrap();
-    let img = image::load_from_memory(resp.bytes().await.unwrap().as_ref()).unwrap();
-    let (w, h) = img.dimensions();
-    (img.as_bytes().to_vec(), w, h)
+pub async fn load_img(url: &str) -> (Vec<u8>, usize, usize) {
+    let resp = tinyget::get(url).send().unwrap();
+    let bytes = resp.as_bytes();
+    let img = decode32(bytes).unwrap();
+    (img.buffer.as_bytes().to_vec(), img.width, img.height)
 }
 
-pub fn parse_img(img_bytes: Vec<u8>, w: u32, h: u32) -> slint::Image {
-    let mut pixel_buffer = slint::SharedPixelBuffer::new(w, h);
+pub fn parse_img(img_bytes: Vec<u8>, w: usize, h: usize) -> slint::Image {
+    let mut pixel_buffer = slint::SharedPixelBuffer::new(w as u32, h as u32);
     let bytes = pixel_buffer.make_mut_bytes();
     
     // print!("w * h: {0}\n", w * h);
