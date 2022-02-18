@@ -136,16 +136,30 @@ Home := Rectangle {
                     background: @linear-gradient(0deg, ta.has-hover ? #171b208d : #171b20dc 0%, transparent 95%);
                 }
                 VerticalLayout {
-                    padding: 16phx;
+                    padding: 22phx;
                     spacing: 4phx;
 
                     Rectangle { 
                         vertical-stretch: 1;
                     }
-                    Text {
-                        text: "Najnowszy";
-                        color: #ffffff;
-                        font-size: 16phx;
+                    HorizontalLayout {
+                        alignment: start;
+                        Text {
+                            text: "Najnowszy";
+                            color: #ffffff;
+                            font-size: 16phx;
+                        }
+
+                        Rectangle {
+                            Rectangle {
+                                width: 9phx;
+                                height: 9phx;
+                                x: 5phx;
+                                y: 4phx;
+                                border-radius: 5phx;
+                                background: #45cc58;
+                            }
+                        }
                     }
                     Text {
                         text: featured-data.title;
