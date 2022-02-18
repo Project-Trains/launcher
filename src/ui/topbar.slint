@@ -7,6 +7,7 @@ InstallButton := Rectangle {
     installButton := TouchArea {
         height: parent.height;
         width: parent.width;
+        mouse-cursor: pointer;
 
         clicked => { 
             root.install-click()
@@ -83,6 +84,7 @@ TopBar := Rectangle {
                 y: 12phx;
                 height: parent.height;
                 width: parent.width;
+                mouse-cursor: pointer;
 
                 clicked => { 
                     root.forum-click()
