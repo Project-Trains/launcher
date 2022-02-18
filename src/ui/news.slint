@@ -7,8 +7,8 @@ Item := Rectangle {
 
     callback news-clicked();
 
-    height: 150phx;
-    max-width: 1200phx;
+    height: 170phx;
+    preferred-width: 800phx;
 
     ta := TouchArea {
         mouse-cursor: pointer;
@@ -18,7 +18,7 @@ Item := Rectangle {
 
         Rectangle { 
             border-radius: 12phx;
-            height: 135phx;
+            height: parent.height - 15phx;
             width: parent.width;
             clip: true;
 
@@ -52,6 +52,8 @@ Item := Rectangle {
 News := Rectangle {
     property <[NewsData]> news;
     background: #12171d;
+    vertical-stretch: 1;
+    horizontal-stretch: 1;
     clip: true;
 
     callback forum-button-clicked();
@@ -60,14 +62,16 @@ News := Rectangle {
     VerticalLayout { 
         padding-left: 20phx;
         padding-right: 20phx;
+
         TopBar {
             forum-click() => { 
                 root.forum-button-clicked();
             }
         }
         Rectangle { height: 15phx; }
-        VerticalLayout { 
-            Flickable {
+        Flickable {
+            HorizontalLayout {
+                alignment: center;
                 VerticalLayout {
                     for data[i] in root.news : Item {
                         title: data.title;
@@ -79,6 +83,6 @@ News := Rectangle {
                     }
                 }
             }
-        }    
+        }
     }
 }
