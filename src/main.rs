@@ -1,107 +1,55 @@
 slint::slint!(import { MainWindow } from "src/ui/main.slint";);
 slint::slint!(import { NewsData } from "src/ui/newsdata.slint";);
 
-//use std::collections::HashMap;
-use pt_launcher::{load_img, parse_img};
-use serde::Deserialize;
+use pt_launcher::{parse_img, post::Post};
 use slint::SharedString;
-use std::time::Duration;
-
-#[derive(Debug, Deserialize)]
-struct DiscussionsIncludesAttributes {
-    featuredImage : String,
-}
-
-#[derive(Debug, Deserialize)]
-struct DiscussionsIncludes {
-    id : String,
-    attributes : DiscussionsIncludesAttributes,
-}
-
-#[derive(Debug, Deserialize)]
-struct DiscussionsDataAttributes {
-    title : String,
-    shareUrl : String,
-}
-
-#[derive(Debug, Deserialize)]
-struct DiscussionsData {
-    id : String,
-    attributes : DiscussionsDataAttributes,
-}
-
-#[derive(Debug, Deserialize)]
-struct Discussions {
-    data : Vec<DiscussionsData>,
-    included : Vec<DiscussionsIncludes>
-}
-
-struct Discussion {
-    title : String,
-    image_buffer : Vec<u8>,
-    width: u32,
-    height: u32
-}
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() {
     let main_window = MainWindow::new();
     let handle_weak = main_window.as_weak();
-    let mut discussions: Vec<Discussion> = vec![];
 
-    main_window.on_blog_redirect({
-        move || {
-            open::that("https://project-trains.pl/").unwrap();
-        }
+    main_window.on_url_redirect(move |url| {
+        open::that(url.as_str()).unwrap();
     });
 
-    main_window.on_close({
-        move || {
-            std::process::exit(0);
-        }
+    main_window.on_close(move || {
+        std::process::exit(0);
     });
 
     tokio::spawn(async move {
-        // delay for testing
-        std::thread::sleep(Duration::new(2, 0));
+        let json = Post::fetch();
+        let posts = Post::parse_posts(&json);
+        update_discussions(handle_weak.clone(), posts);
 
-        let disc_resp = reqwest::get("https://project-trains.pl/api/discussions?include=blogMeta&filter[q]=is:blog+tag:devlogi&sort=-createdAt").await;
-        let disc_json = disc_resp.unwrap().json::<Discussions>().await.unwrap();
-        println!("{:#?}", disc_json);
+        let mut posts = Post::parse_posts(&json);
+        posts = Post::load_feature_image(posts).await;
 
-        for i in 0..disc_json.data.len() {
-            let img_url : &str = &disc_json.included[i].attributes.featuredImage;
-            let (img_buffer, w, h) = load_img(img_url).await;
-            // let (img_buffer, w, h) = load_img("https://picsum.photos/800/450").await;
+        update_discussions(handle_weak.clone(), posts);
 
-            let disc = Discussion {
-                title: disc_json.data[i].attributes.title.clone(),
-                image_buffer: img_buffer,
-                width: w,
-                height: h
-            };
+        let mut posts = Post::parse_posts(&json);
+        posts = Post::load_images(posts).await;
 
-            discussions.push(disc);
-        }
-
-        update_discussions(handle_weak.clone(), discussions);
-
-        let (img, w, h) = load_img("https://picsum.photos/800/450").await;
-        update_featured(handle_weak.clone(), img, w, h);
+        update_discussions(handle_weak.clone(), posts);
     });
 
     main_window.run();
-    Ok(())
 }
 
-fn update_discussions(handle: slint::Weak<MainWindow>, discussions: Vec<Discussion>) {
+fn update_discussions(handle: slint::Weak<MainWindow>, posts: Vec<Post>) {
     handle.upgrade_in_event_loop(move |handle| {
         let mut news_data: Vec<NewsData> = vec![];
 
-        for i in 0..discussions.len() {
+        for i in 0..posts.len() {
             let news = NewsData {
-                title: SharedString::from(discussions[i].title.clone()),
-                cover: parse_img(discussions[i].image_buffer.to_vec(), discussions[i].width, discussions[i].height)
+                title: SharedString::from(posts[i].title.clone()),
+                excerpt: SharedString::from(posts[i].excerpt.clone()),
+                cover: parse_img(
+                    posts[i].image_buffer.to_vec(),
+                    posts[i].width,
+                    posts[i].height,
+                ),
+                url: SharedString::from(posts[i].url.clone()),
             };
 
             news_data.push(news);
@@ -109,12 +57,5 @@ fn update_discussions(handle: slint::Weak<MainWindow>, discussions: Vec<Discussi
 
         let news_model = std::rc::Rc::new(slint::VecModel::from(news_data));
         handle.set_news(slint::ModelRc::from(news_model.clone()));
-    });
-}
-
-fn update_featured(handle: slint::Weak<MainWindow>, image: Vec<u8>, w: u32, h: u32) {
-    handle.upgrade_in_event_loop(move |handle| {
-        let img = parse_img(image, w, h);
-        handle.set_featured(img);
     });
 }

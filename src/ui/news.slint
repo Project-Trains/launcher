@@ -4,12 +4,21 @@ import { NewsData } from "./newsdata.slint";
 Item := Rectangle {
     property <string> title;
     property <image> image;
-    height: 150phx;
+
+    callback news-clicked();
+
+    height: 170phx;
+    preferred-width: 800phx;
 
     ta := TouchArea {
+        mouse-cursor: pointer;
+        clicked => {
+            root.news-clicked()
+        }
+
         Rectangle { 
             border-radius: 12phx;
-            height: 135phx;
+            height: parent.height - 15phx;
             width: parent.width;
             clip: true;
 
@@ -43,28 +52,37 @@ Item := Rectangle {
 News := Rectangle {
     property <[NewsData]> news;
     background: #12171d;
+    vertical-stretch: 1;
+    horizontal-stretch: 1;
     clip: true;
 
     callback forum-button-clicked();
+    callback news-button-clicked(string);
 
     VerticalLayout { 
         padding-left: 20phx;
         padding-right: 20phx;
+
         TopBar {
             forum-click() => { 
-                root.forum-button-clicked()
+                root.forum-button-clicked();
             }
         }
         Rectangle { height: 15phx; }
-        VerticalLayout { 
-            Flickable {
+        Flickable {
+            HorizontalLayout {
+                alignment: center;
                 VerticalLayout {
                     for data[i] in root.news : Item {
                         title: data.title;
                         image: data.cover;
+                        
+                        news-clicked() => {
+                            root.news-button-clicked(data.url);
+                        }
                     }
                 }
             }
-        }    
+        }
     }
 }

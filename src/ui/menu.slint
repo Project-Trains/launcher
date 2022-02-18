@@ -8,6 +8,7 @@ MenuButton := Rectangle {
     callback menu-clicked;
 
     ta := TouchArea {
+        mouse-cursor: pointer;
         clicked => {
             root.menu-clicked()
         }
@@ -120,6 +121,7 @@ Menu := Rectangle {
             quit-ta := TouchArea {
                 width: 260phx;
                 height: 46phx;
+                mouse-cursor: pointer;
 
                 clicked => {
                     root.quit-launcher()
