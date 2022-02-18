@@ -18,7 +18,18 @@ async fn main() {
     });
 
     tokio::spawn(async move {
-        let posts = Post::fetch().await;
+        let json = Post::fetch();
+        let posts = Post::parse_posts(&json);
+        update_discussions(handle_weak.clone(), posts);
+
+        let mut posts = Post::parse_posts(&json);
+        posts = Post::load_feature_image(posts).await;
+
+        update_discussions(handle_weak.clone(), posts);
+
+        let mut posts = Post::parse_posts(&json);
+        posts = Post::load_images(posts).await;
+
         update_discussions(handle_weak.clone(), posts);
     });
 
