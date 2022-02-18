@@ -6,12 +6,11 @@ edition = "2021"
 [dependencies]
 slint = "0.2.0"
 open = "2.0.3"
-futures = "0.3.21"
 tinyget = { version = "1.0", features = ["https"] }
 json = "0.12.4"
 lodepng = "3.6.1"
 rgb = "0.8.31"
-tokio = { version = "1.16.1", features = ["full"] }
+tokio = { version = "1.16.1", features = ["rt", "macros", "rt-multi-thread"] }
 
 [build-dependencies]
 slint-build = "0.2.0"
