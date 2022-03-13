@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 slint::slint!(import { MainWindow } from "src/ui/main.slint";);
 slint::slint!(import { NewsData } from "src/ui/newsdata.slint";);
 
