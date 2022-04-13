@@ -8,7 +8,7 @@ Market := Rectangle {
 
     callback forum-button-clicked();
 
-    VerticalLayout { 
+    VerticalLayout {
         padding-left: 20phx;
         padding-right: 20phx;
         TopBar {
@@ -16,7 +16,244 @@ Market := Rectangle {
                 root.forum-button-clicked()
             }
         }
+
         Rectangle { height: 15phx; }
-        
+
+        HorizontalLayout {
+            horizontal-stretch: 1;
+            vertical-stretch: 1;
+            height: 400phx;
+
+            Rectangle { 
+                horizontal-stretch: 1;
+                vertical-stretch: 1;
+                border-radius: 20phx;
+                background: #161a1f;
+                drop-shadow-color: #0000006e;
+                drop-shadow-blur: 12phx;
+                clip: true;
+    
+                ta := TouchArea {
+                    mouse-cursor: pointer;
+    
+                    Image {
+                        source: @image-url("../assets/devlog.jpg");
+                        image-fit: cover;
+                        height: parent.height;
+                        width: parent.width;
+                    }
+                    Rectangle {
+                        height: parent.height;
+                        width: parent.width;
+                        background: @linear-gradient(0deg, ta.has-hover ? #171b208d : #171b20dc 0%, transparent 95%);
+                    }
+                    VerticalLayout {
+                        padding: 22phx;
+                        spacing: 4phx;
+    
+                        Rectangle {
+                            vertical-stretch: 1;
+                        }
+                        Text {
+                            text: "Text";
+                            color: #ffffff;
+                            font-size: 32phx;
+                            font-weight: 800;
+                            overflow: TextOverflow.elide;
+                        }
+                        Rectangle {
+                            vertical-stretch: 0;
+                        }
+                        Text {
+                            //text: featured-data.excerpt;
+                            color: #ffffff;
+                            font-size: 15phx;
+                            wrap: word-wrap;
+                        }
+                        Rectangle {
+                            vertical-stretch: 0;
+                        }
+                    }
+                }
+            }
+
+            VerticalLayout {
+                width: 300phx;
+                padding-left: 10phx;
+
+                Rectangle { 
+                    horizontal-stretch: 1;
+                    border-radius: 20phx;
+                    background: #161a1f;
+                    drop-shadow-color: #0000006e;
+                    drop-shadow-blur: 12phx;
+                    clip: true;
+
+                    Image {
+                        source: @image-url("../assets/devlog.jpg");
+                        image-fit: cover;
+                        height: parent.height;
+                        width: parent.width;
+                    }
+                }
+
+                Rectangle { height: 10phx; }
+
+                Rectangle { 
+                    horizontal-stretch: 1;
+                    border-radius: 20phx;
+                    background: #161a1f;
+                    drop-shadow-color: #0000006e;
+                    drop-shadow-blur: 12phx;
+                    clip: true;
+
+                    Image {
+                        source: @image-url("../assets/devlog.jpg");
+                        image-fit: cover;
+                        height: parent.height;
+                        width: parent.width;
+                    }
+                }
+            }
+        }
+
+        Rectangle { height: 15phx; }
+
+        Rectangle {
+            horizontal-stretch: 1;
+            border-radius: 20phx;
+            background: #1b222b;
+            height: 50phx;
+            clip: true;
+
+            HorizontalLayout {
+                horizontal-stretch: 1;
+                vertical-stretch: 1;
+
+                Rectangle {
+                    horizontal-stretch: 1;
+                    vertical-stretch: 1;
+                    
+                    m1 := TouchArea {
+                        mouse-cursor: pointer;
+                        clicked => { 
+    
+                        }
+                        Rectangle { 
+                            background: m1.has-hover ? #181e27 : #1b222b;
+                            animate background { duration: 0.2s; }
+
+                            HorizontalLayout {
+                                alignment: center;
+                                
+                                Text {
+                                    text: "Składy";
+                                    color: white;
+                                    font-size: 20phx;
+                                    y: 14phx;
+                                }
+                            }
+                            Image {
+                                x: parent.width * 0.15;
+                                y: 14phx;
+                                source: @image-url("../assets/train.svg");
+                                width: 18phx;
+                                height: 22phx;
+                            }
+                        }
+                    }
+                }
+
+                Rectangle { 
+                    width: 1phx;
+                    height: 100%;
+
+                    Rectangle {
+                        y: 5phx;
+                        background: #2a3644;
+                        height: parent.height - y * 2;
+                    }
+                }
+
+                Rectangle {
+                    horizontal-stretch: 1;
+                    vertical-stretch: 1;
+                    
+                    m2 := TouchArea {
+                        mouse-cursor: pointer;
+                        clicked => { 
+    
+                        }
+                        Rectangle { 
+                            background: m2.has-hover ? #181e27 : #1b222b;
+                            animate background { duration: 0.2s; }
+
+                            HorizontalLayout {
+                                alignment: center;
+                                
+                                Text {
+                                    text: "Malowania";
+                                    color: white;
+                                    font-size: 20phx;
+                                    y: 14phx;
+                                }
+                            }
+                            Image {
+                                x: parent.width * 0.15;
+                                y: 14phx;
+                                source: @image-url("../assets/brush.svg");
+                                width: 22phx;
+                                height: 22phx;
+                            }
+                        }
+                    }
+                }
+
+                Rectangle { 
+                    width: 1phx;
+                    height: 100%;
+
+                    Rectangle {
+                        y: 5phx;
+                        background: #2a3644;
+                        height: parent.height - y * 2;
+                    }
+                }
+
+                Rectangle {
+                    horizontal-stretch: 1;
+                    vertical-stretch: 1;
+                    
+                    m3 := TouchArea {
+                        mouse-cursor: pointer;
+                        clicked => { 
+    
+                        }
+                        Rectangle { 
+                            background: m3.has-hover ? #181e27 : #1b222b;
+                            animate background { duration: 0.2s; }
+
+                            HorizontalLayout {
+                                alignment: center;
+                                
+                                Text {
+                                    text: "Składy";
+                                    color: white;
+                                    font-size: 20phx;
+                                    y: 14phx;
+                                }
+                            }
+                            Image {
+                                x: parent.width * 0.15;
+                                y: 14phx;
+                                source: @image-url("../assets/train.svg");
+                                width: 18phx;
+                                height: 22phx;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
