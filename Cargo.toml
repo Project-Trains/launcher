@@ -4,7 +4,7 @@ version = "0.1.4"
 edition = "2021"
 
 [dependencies]
-slint = { version = "0.2.0", features = ["std", "backend-qt"] }
+slint = { version = "0.2.1", features = ["std", "backend-qt"] }
 open = "2.1.1"
 tinyget = { version = "1.0.1", features = ["https"] }
 json = "0.12.4"
@@ -13,4 +13,4 @@ rgb = "0.8.32"
 tokio = { version = "1.17.0", features = ["rt", "macros", "rt-multi-thread"] }
 
 [build-dependencies]
-slint-build = "0.2.0"
+slint-build = "0.2.1"
