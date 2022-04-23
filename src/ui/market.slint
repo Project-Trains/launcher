@@ -1,5 +1,27 @@
 import { TopBar } from "./topbar.slint";
 
+Item := Rectangle {
+    vertical-stretch: 1;
+    width: 300phx;
+
+    Rectangle { 
+        height: parent.height;
+        width: parent.width - 20phx;
+        border-radius: 20phx;
+        background: #161a1f;
+        drop-shadow-color: #0000006e;
+        drop-shadow-blur: 12phx;
+        clip: true;
+
+        Image {
+            source: @image-url("../assets/devlog.jpg");
+            image-fit: cover;
+            height: parent.height;
+            width: parent.width;
+        }
+    }
+}
+
 Market := Rectangle {
     background: #12171d;
     vertical-stretch: 1;
@@ -11,13 +33,14 @@ Market := Rectangle {
     VerticalLayout {
         padding-left: 20phx;
         padding-right: 20phx;
+
         TopBar {
             forum-click() => { 
                 root.forum-button-clicked()
             }
         }
 
-        Rectangle { height: 15phx; }
+        Rectangle { height: 20phx; }
 
         HorizontalLayout {
             horizontal-stretch: 1;
@@ -79,7 +102,7 @@ Market := Rectangle {
 
             VerticalLayout {
                 width: 300phx;
-                padding-left: 10phx;
+                padding-left: 20phx;
 
                 Rectangle { 
                     horizontal-stretch: 1;
@@ -97,7 +120,7 @@ Market := Rectangle {
                     }
                 }
 
-                Rectangle { height: 10phx; }
+                Rectangle { height: 20phx; }
 
                 Rectangle { 
                     horizontal-stretch: 1;
@@ -117,7 +140,7 @@ Market := Rectangle {
             }
         }
 
-        Rectangle { height: 15phx; }
+        Rectangle { height: 20phx; }
 
         Rectangle {
             horizontal-stretch: 1;
@@ -140,7 +163,7 @@ Market := Rectangle {
     
                         }
                         Rectangle { 
-                            background: m1.has-hover ? #181e27 : #1b222b;
+                            background: m1.has-hover ? #181f25 : #1b222b;
                             animate background { duration: 0.2s; }
 
                             HorizontalLayout {
@@ -164,9 +187,9 @@ Market := Rectangle {
                     }
                 }
 
-                Rectangle { 
+                Rectangle {
+                    vertical-stretch: 1;
                     width: 1phx;
-                    height: 100%;
 
                     Rectangle {
                         y: 5phx;
@@ -185,7 +208,7 @@ Market := Rectangle {
     
                         }
                         Rectangle { 
-                            background: m2.has-hover ? #181e27 : #1b222b;
+                            background: m2.has-hover ? #181f25 : #1b222b;
                             animate background { duration: 0.2s; }
 
                             HorizontalLayout {
@@ -209,9 +232,9 @@ Market := Rectangle {
                     }
                 }
 
-                Rectangle { 
+                Rectangle {
+                    vertical-stretch: 1;
                     width: 1phx;
-                    height: 100%;
 
                     Rectangle {
                         y: 5phx;
@@ -230,7 +253,7 @@ Market := Rectangle {
     
                         }
                         Rectangle { 
-                            background: m3.has-hover ? #181e27 : #1b222b;
+                            background: m3.has-hover ? #181f25 : #1b222b;
                             animate background { duration: 0.2s; }
 
                             HorizontalLayout {
@@ -254,6 +277,36 @@ Market := Rectangle {
                     }
                 }
             }
+        }
+
+        Rectangle { height: 20phx; }
+
+        HorizontalLayout {
+            horizontal-stretch: 1;
+            vertical-stretch: 1;
+            height: 180phx;
+
+            for i in [1, 2, 3, 4, 5]: Item { }
+        }
+
+        Rectangle { height: 20phx; }
+
+        HorizontalLayout {
+            horizontal-stretch: 1;
+            vertical-stretch: 1;
+            height: 180phx;
+
+            for i in [1, 2, 3, 4, 5]: Item { }
+        }
+
+        Rectangle { height: 20phx; }
+
+        HorizontalLayout {
+            horizontal-stretch: 1;
+            vertical-stretch: 1;
+            height: 180phx;
+
+            for i in [1, 2, 3, 4, 5]: Item { }
         }
     }
 }
