@@ -2,19 +2,19 @@
 name = "pt-launcher"
 version = "0.1.4"
 edition = "2021"
-rust-version = "1.60"
+rust-version = "1.62"
 
 [dependencies]
-slint = { version = "0.2.4", features = ["std", "backend-qt"] }
-open = "2.1.2"
+slint = { version = "0.2.5", features = ["std", "backend-qt"] }
+open = "3.0.2"
 tinyget = { version = "1.0.1", features = ["https"] }
 json = "0.12.4"
-lodepng = "3.6.1"
-rgb = "0.8.32"
-tokio = { version = "1.18.2", features = ["rt", "macros", "rt-multi-thread"] }
+lodepng = "3.7.0"
+rgb = "0.8.33"
+tokio = { version = "1.20.1", features = ["rt", "macros", "rt-multi-thread"] }
 
 [build-dependencies]
-slint-build = "0.2.4"
+slint-build = "0.2.5"
 
 [profile.release]
 codegen-units = 1
